@@ -1,1 +1,3 @@
 # KaRa-Doa
+
+** autor: ** Kauan 
