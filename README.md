@@ -1,3 +1,3 @@
 # KaRa-Doa
 
-**autor:** Kauan 
+**autor:** Kauan Barbosa Machado.
