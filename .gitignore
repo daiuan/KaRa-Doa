@@ -1,7 +1,1 @@
-venv/
-*/__pycache__
-
-staticfiles/
-
-__pycache__/
-*.py[cod]
+*/node_modules
