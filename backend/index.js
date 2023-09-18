@@ -47,7 +47,11 @@ app.post('/pessoa', async (req,res)=>{
     return res.status(200).json(query)
 })
 
-app.put
+app.put('/pessoa/:id', async (req, res) => {
+    const {id} = req.params;
+    const [query] = await connection.execute('select * from TestePessoa.Pessoa where id = ?', [id]);
+    res.send("PUT Request Called")
+})
 
 app.delete('/pessoa', async (req,res)=>{
     res.send("DELETE Request Called")
