@@ -51,6 +51,6 @@ app.put
 
 app.delete('/pessoa', async (req,res)=>{
     res.send("DELETE Request Called")
-    const [query] = await connection.execute('delete from TestePessoa.Pessoa (nome,email) values(?,?)', [nome,email])
-    return res.status(200).json(query)
+    //const [query] = await connection.execute('delete from TestePessoa.Pessoa (nome,email) values(?,?)', [nome,email])
+    //return res.status(200).json(query)
 })
