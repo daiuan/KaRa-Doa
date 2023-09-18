@@ -1,6 +1,7 @@
 const express=require('express')
 const app = express();
-app.use(express.json())
+app.use(express.urlencoded({ extend: true}));
+app.use(express.json());
 app.listen(9000, () => console.log("OK"));
 
 const mysql = require('mysql2/promise')
@@ -33,8 +34,23 @@ app.get('/pessoa/:id', async (req,res)=>{
     return res.status(200).json(query);
 })
 
+app.get('/pessoa/buscar/:nome', async (req,res)=>{
+    const {nome} = req.params;
+    const [query] = await connection.execute('select * from TestePessoa.Pessoa where nome = ?', [nome]);
+    if(query.lenght === 0) return res.status(400).json({mensagem: 'Nao encontrado. '})
+    return res.status(200).json(query);
+})
+
 app.post('/pessoa', async (req,res)=>{
     const {nome, email} = req.body
     const [query] = await connection.execute('insert into TestePessoa.Pessoa (nome,email) values(?,?)', [nome,email])
+    return res.status(200).json(query)
+})
+
+app.put
+
+app.delete('/pessoa', async (req,res)=>{
+    res.send("DELETE Request Called")
+    const [query] = await connection.execute('delete from TestePessoa.Pessoa (nome,email) values(?,?)', [nome,email])
     return res.status(200).json(query)
 })
