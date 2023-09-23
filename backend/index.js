@@ -48,13 +48,13 @@ app.post('/pessoa', async (req,res)=>{
 })
 
 app.put('/pessoa/:id', async (req, res) => {
-    const {id} = req.params;
-    const [query] = await connection.execute('select * from TestePessoa.Pessoa where id = ?', [id]);
-    res.send("PUT Request Called")
+    const {nome, email} = req.body
+    const [query] = await connection.execute('update TestePessoa.Pessoa (nome,email) values(?,?)', [nome,email])
+    return res.status(200).json(query)
 })
 
-app.delete('/pessoa', async (req,res)=>{
-    res.send("DELETE Request Called")
-    //const [query] = await connection.execute('delete from TestePessoa.Pessoa (nome,email) values(?,?)', [nome,email])
-    //return res.status(200).json(query)
+app.delete('/pessoa/:id', async (req,res)=>{
+    const {nome, email} = req.body
+    const [query] = await connection.execute('delete from TestePessoa.Pessoa (nome,email) values(?,?)', [nome,email])
+    return res.status(200).json(query)
 })
