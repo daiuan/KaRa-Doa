@@ -49,7 +49,7 @@ app.post('/pessoa', async (req,res)=>{
 
 app.put('/pessoa/:id', async (req, res) => {
     const {nome, email} = req.body
-    const [query] = await connection.execute('update TestePessoa.Pessoa (nome,email) values(?,?)', [nome,email])
+    const [query] = await connection.execute('update TestePessoa.Pessoa set (nome,email) values(?,?)', [nome,email])
     return res.status(200).json(query)
 })
 
