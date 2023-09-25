@@ -18,43 +18,49 @@ app.get('/', (req,res)=>{
 
 const getAllPessoas = async () =>{
     const [query] = await connection
-    .execute ('select * from TestePessoa.Pessoa')
+    .execute ('select * from TestePessoa.Pessoa');
     return query;
 }
 
 app.get('/pessoa', async (req,res)=>{
-    const consulta = await getAllPessoas()
-    return res.status(200).json(consulta)
+    const consulta = await getAllPessoas();
+    return res.status(200).json(consulta);
 })
 
 app.get('/pessoa/:id', async (req,res)=>{
     const {id} = req.params;
     const [query] = await connection.execute('select * from TestePessoa.Pessoa where id = ?', [id]);
-    if(query.lenght === 0) return res.status(400).json({mensagem: 'Nao encontrado. '})
+    if(query.lenght === 0) return res.status(400).json({mensagem: 'Nao encontrado. '});
     return res.status(200).json(query);
 })
 
 app.get('/pessoa/buscar/:nome', async (req,res)=>{
     const {nome} = req.params;
-    const [query] = await connection.execute('select * from TestePessoa.Pessoa where nome = ?', [nome]);
-    if(query.lenght === 0) return res.status(400).json({mensagem: 'Nao encontrado. '})
+    const [query] = await connection.execute('select * from TestePessoa.Pessoa where nome = ?', [nome]);;
+    if(query.lenght === 0) return res.status(400).json({mensagem: 'Nao encontrado. '});
     return res.status(200).json(query);
 })
 
 app.post('/pessoa', async (req,res)=>{
-    const {nome, email} = req.body
-    const [query] = await connection.execute('insert into TestePessoa.Pessoa (nome,email) values(?,?)', [nome,email])
-    return res.status(200).json(query)
+    const {nome, email} = req.body;
+    const [query] = await connection.execute('insert into TestePessoa.Pessoa (nome,email) values(?,?)', [nome,email]);
+    if(query.lenght === 0) return res.status(400).json({mensagem: 'Erro na adição'});
+    return res.status(200).json({ mensagem: 'Inserido com sucesso.' });
 })
 
 app.put('/pessoa/:id', async (req, res) => {
-    const {nome, email} = req.body
-    const [query] = await connection.execute('update TestePessoa.Pessoa set (nome,email) values(?,?)', [nome,email])
-    return res.status(200).json(query)
+    const { id } = req.params;
+    const {nome, email} = req.body;
+    const connection = await createConnection();
+    const [updateResult] = await connection.execute('UPDATE TestePessoa.Pessoa SET nome = ?, email = ? WHERE id = ?', [nome, email, id]);
+    connection.end();
+    if (updateResult.affectedRows === 0) return res.status(404).json({ mensagem: 'Pessoa não encontrado.' });
+    return res.status(200).json({ mensagem: 'Pessoa alterado com sucesso.' });
 })
 
 app.delete('/pessoa/:id', async (req,res)=>{
-    const { id } = req.params
-    const [query] = await connection.execute('delete from TestePessoa.Pessoa where id = ?', [id])
-    return res.status(200).json(query)
+    const { id } = req.params;
+    const [query] = await connection.execute('delete from TestePessoa.Pessoa where id = ?', [id]);
+    if(query.affectedRows === 0) return res.status(400).json({mensagem: 'Erro no delete'});
+    return res.status(200).json({ mensagem: 'Deletado com sucesso.' });
 })
