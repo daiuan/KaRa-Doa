@@ -51,16 +51,16 @@ app.post('/pessoa', async (req,res)=>{
 app.put('/pessoa/:id', async (req, res) => {
     const { id } = req.params;
     const {nome, email} = req.body;
-    const connection = await createConnection();
-    const [updateResult] = await connection.execute('UPDATE TestePessoa.Pessoa SET nome = ?, email = ? WHERE id = ?', [nome, email, id]);
-    connection.end();
-    if (updateResult.affectedRows === 0) return res.status(404).json({ mensagem: 'Pessoa não encontrado.' });
-    return res.status(200).json({ mensagem: 'Pessoa alterado com sucesso.' });
+    const [query] = await connection.execute('UPDATE TestePessoa.Pessoa SET nome = ?, email = ? WHERE id = ?', [nome, email, id]);
+    if (query.affectedRows === 0) return res.status(404).json({ mensagem: 'Pessoa não encontrada.' });
+    return res.status(200).json({ mensagem: 'Pessoa alterada com sucesso.' });
 })
 
 app.delete('/pessoa/:id', async (req,res)=>{
     const { id } = req.params;
     const [query] = await connection.execute('delete from TestePessoa.Pessoa where id = ?', [id]);
-    if(query.affectedRows === 0) return res.status(400).json({mensagem: 'Erro no delete'});
-    return res.status(200).json({ mensagem: 'Deletado com sucesso.' });
+    if (query.affectedRows === 0) return res.status(404).json({ mensagem: 'Não encontrado.' });
+    return res.status(200).json({ mensagem: 'Pessoa excluída com sucesso.' });
 })
+
+
