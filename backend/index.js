@@ -107,8 +107,8 @@ app.post('/doador', async (req,res)=>{
 
 app.put('/doador/:id', async (req, res) => {
     const { id } = req.params;
-    const {nome, email} = req.body;
-    const [query] = await connection.execute('UPDATE karadoa.doador SET nome = ?, email = ? WHERE id = ?', [nome, email, id]);
+    const {nome, email, cpf, telefone, senha, cep, cidade, estado} = req.body;
+    const [query] = await connection.execute('UPDATE karadoa.doador SET nome = ?, email = ?, cpf = ?, telefone = ?, senha = ?, cep = ?, cidade = ?, estado = ? WHERE id = ?', [nome, email, cpf, telefone, senha, cep, cidade, estado, id]);
     if (query.affectedRows === 0) return res.status(404).json({ mensagem: 'Doador não encontrado.' });
     return res.status(200).json({ mensagem: 'Doador alterado com sucesso.' });
 })
@@ -142,12 +142,68 @@ app.get('/doacao/:id', async (req,res)=>{
 
 app.post('/doacao', async (req,res)=>{
     const {id_doador, id_campanha, valor, status, data, modelo, mensagem} = req.body;
-    const [query] = await connection.execute('insert into karadoa.docao (id_doador,id_campanha,valor,status,data,modelo,mensagem) values(?,?,?,?,?,?,?)', [id_doador,id_campanha,valor,status,data,modelo,mensagem]);
+    const [query] = await connection.execute('insert into karadoa.doacao (id_doador,id_campanha,valor,status,data,modelo,mensagem) values(?,?,?,?,?,?,?)', [id_doador,id_campanha,valor,status,data,modelo,mensagem]);
     if(query.lenght === 0) return res.status(400).json({mensagem: 'Erro na adição'});
     return res.status(200).json({ mensagem: 'Inserido com sucesso.' });
 })
 
+app.put('/doacao/:id', async (req, res) => {
+    const { id } = req.params;
+    const {status} = req.body;
+    const [query] = await connection.execute('UPDATE karadoa.doacao SET status = ? WHERE id = ?', [status, id]);
+    if (query.affectedRows === 0) return res.status(404).json({ mensagem: 'Doação não encontrado.' });
+    return res.status(200).json({ mensagem: 'Doação alterada com sucesso.' });
+})
+
 // MÉTODOS PARA A TABELA CAMPANHA
+
+const getAllcampanha = async () =>{
+    const [query] = await connection
+    .execute ('select * from karadoa.campanha');
+    return query;
+}
+
+app.get('/campanha', async (req,res)=>{
+    const consulta = await getAllcampanha();
+    return res.status(200).json(consulta);
+})
+
+app.get('/campanha/:id', async (req,res)=>{
+    const {id} = req.params;
+    const [query] = await connection.execute('select * from karadoa.campanha where id = ?', [id]);
+    if(query.lenght === 0) return res.status(400).json({mensagem: 'Nao encontrada. '});
+    return res.status(200).json(query);
+})
+
+app.get('/campanha/buscar/:nome', async (req,res)=>{
+    const {nome} = req.params;
+    let nomex = '%'+nome+'%'
+    const [query] = await connection.execute('select * from karadoa.campanha where nome like ?', [nomex]);
+    if(query.lenght === 0) return res.status(400).json({mensagem: 'Nao encontrada. '});
+    return res.status(200).json(query);
+})
+
+app.post('/campanha', async (req,res)=>{
+    const {nome, descricao, meta, categoria, pix, status} = req.body;
+    const [query] = await connection.execute('insert into karadoa.campanha (nome,descricao,meta,categoria,pix,status) values(?,?,?,?,?,?)', [nome,descricao,meta,categoria,pix,status]);
+    if(query.lenght === 0) return res.status(400).json({mensagem: 'Erro na adição'});
+    return res.status(200).json({ mensagem: 'Inserido com sucesso.' });
+})
+
+app.put('/campanha/:id', async (req, res) => {
+    const { id } = req.params;
+    const {nome, descricao, meta, categoria, pix, status} = req.body;
+    const [query] = await connection.execute('UPDATE karadoa.campanha SET nome = ?, descricao = ?, meta = ?, categoria = ?, pix = ?, status = ? WHERE id = ?', [nome,descricao,meta,categoria,pix,status,id]);
+    if (query.affectedRows === 0) return res.status(404).json({ mensagem: 'Campanha não encontrada.' });
+    return res.status(200).json({ mensagem: 'Campanha alterada com sucesso.' });
+})
+
+app.delete('/campanha/:id', async (req,res)=>{
+    const { id } = req.params;
+    const [query] = await connection.execute('delete from karadoa.campanha where id = ?', [id]);
+    if (query.affectedRows === 0) return res.status(404).json({ mensagem: 'Não encontrada.' });
+    return res.status(200).json({ mensagem: 'Campanha excluída com sucesso.' });
+})
 
 // MÉTODOS PARA A TABELA USUÁRIO
 
