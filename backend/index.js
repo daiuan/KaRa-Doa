@@ -1,8 +1,12 @@
 const express=require('express')
+const cors = require('cors');
+
 const app = express();
 app.use(express.urlencoded({ extend: true}));
 app.use(express.json());
-app.listen(9000, () => console.log("OK"));
+app.use(cors());
+
+app.listen(9000, () => console.log("Tudo funcionando chefia 😎👍"));
 
 const mysql = require('mysql2/promise')
 const connection = mysql.createPool({
@@ -31,7 +35,7 @@ app.get('/pessoa', async (req,res)=>{
 app.get('/pessoa/:id', async (req,res)=>{
     const {id} = req.params;
     const [query] = await connection.execute('select * from TestePessoa.Pessoa where id = ?', [id]);
-    if(query.lenght === 0) return res.status(400).json({mensagem: 'Nao encontrado. '});
+    if(query.length === 0) return res.status(400).json({mensagem: 'Nao encontrado. '});
     return res.status(200).json(query);
 })
 
@@ -39,14 +43,14 @@ app.get('/pessoa/buscar/:nome', async (req,res)=>{
     const {nome} = req.params;
     let nomex = '%'+nome+'%'
     const [query] = await connection.execute('select * from TestePessoa.Pessoa where nome like ?', [nomex]);
-    if(query.lenght === 0) return res.status(400).json({mensagem: 'Nao encontrado. '});
+    if(query.length === 0) return res.status(400).json({mensagem: 'Nao encontrado. '});
     return res.status(200).json(query);
 })
 
 app.post('/pessoa', async (req,res)=>{
     const {nome, email} = req.body;
     const [query] = await connection.execute('insert into TestePessoa.Pessoa (nome,email) values(?,?)', [nome,email]);
-    if(query.lenght === 0) return res.status(400).json({mensagem: 'Erro na adição'});
+    if(query.length === 0) return res.status(400).json({mensagem: 'Erro na adição'});
     return res.status(200).json({ mensagem: 'Inserido com sucesso.' });
 })
 
@@ -86,7 +90,7 @@ app.get('/doador', async (req,res)=>{
 app.get('/doador/:id', async (req,res)=>{
     const {id} = req.params;
     const [query] = await connection.execute('select * from karadoa.doador where id = ?', [id]);
-    if(query.lenght === 0) return res.status(400).json({mensagem: 'Nao encontrado. '});
+    if(query.length === 0) return res.status(400).json({mensagem: 'Nao encontrado. '});
     return res.status(200).json(query);
 })
 
@@ -94,14 +98,14 @@ app.get('/doador/buscar/:nome', async (req,res)=>{
     const {nome} = req.params;
     let nomex = '%'+nome+'%'
     const [query] = await connection.execute('select * from karadoa.doador where nome like ?', [nomex]);
-    if(query.lenght === 0) return res.status(400).json({mensagem: 'Nao encontrado. '});
+    if(query.length === 0) return res.status(400).json({mensagem: 'Nao encontrado. '});
     return res.status(200).json(query);
 })
 
 app.post('/doador', async (req,res)=>{
     const {nome, email, cpf, telefone, senha, cep, cidade, estado} = req.body;
     const [query] = await connection.execute('insert into karadoa.doador (nome,email,cpf,telefone,senha,cep,cidade,estado) values(?,?,?,?,?,?,?,?)', [nome,email,cpf,telefone,senha,cep,cidade,estado]);
-    if(query.lenght === 0) return res.status(400).json({mensagem: 'Erro na adição'});
+    if(query.length === 0) return res.status(400).json({mensagem: 'Erro na adição'});
     return res.status(200).json({ mensagem: 'Inserido com sucesso.' });
 })
 
@@ -136,14 +140,14 @@ app.get('/doacao', async (req,res)=>{
 app.get('/doacao/:id', async (req,res)=>{
     const {id} = req.params;
     const [query] = await connection.execute('select * from karadoa.doacao where id = ?', [id]);
-    if(query.lenght === 0) return res.status(400).json({mensagem: 'Nao encontrado. '});
+    if(query.length === 0) return res.status(400).json({mensagem: 'Nao encontrado. '});
     return res.status(200).json(query);
 })
 
 app.post('/doacao', async (req,res)=>{
     const {id_doador, id_campanha, valor, status, data, modelo, mensagem} = req.body;
     const [query] = await connection.execute('insert into karadoa.doacao (id_doador,id_campanha,valor,status,data,modelo,mensagem) values(?,?,?,?,?,?,?)', [id_doador,id_campanha,valor,status,data,modelo,mensagem]);
-    if(query.lenght === 0) return res.status(400).json({mensagem: 'Erro na adição'});
+    if(query.length === 0) return res.status(400).json({mensagem: 'Erro na adição'});
     return res.status(200).json({ mensagem: 'Inserido com sucesso.' });
 })
 
@@ -171,7 +175,7 @@ app.get('/campanha', async (req,res)=>{
 app.get('/campanha/:id', async (req,res)=>{
     const {id} = req.params;
     const [query] = await connection.execute('select * from karadoa.campanha where id = ?', [id]);
-    if(query.lenght === 0) return res.status(400).json({mensagem: 'Nao encontrada. '});
+    if(query.length === 0) return res.status(400).json({mensagem: 'Nao encontrada. '});
     return res.status(200).json(query);
 })
 
@@ -179,14 +183,14 @@ app.get('/campanha/buscar/:nome', async (req,res)=>{
     const {nome} = req.params;
     let nomex = '%'+nome+'%'
     const [query] = await connection.execute('select * from karadoa.campanha where nome like ?', [nomex]);
-    if(query.lenght === 0) return res.status(400).json({mensagem: 'Nao encontrada. '});
+    if(query.length === 0) return res.status(400).json({mensagem: 'Nao encontrada. '});
     return res.status(200).json(query);
 })
 
 app.post('/campanha', async (req,res)=>{
     const {nome, descricao, meta, categoria, pix, status} = req.body;
     const [query] = await connection.execute('insert into karadoa.campanha (nome,descricao,meta,categoria,pix,status) values(?,?,?,?,?,?)', [nome,descricao,meta,categoria,pix,status]);
-    if(query.lenght === 0) return res.status(400).json({mensagem: 'Erro na adição'});
+    if(query.length === 0) return res.status(400).json({mensagem: 'Erro na adição'});
     return res.status(200).json({ mensagem: 'Inserido com sucesso.' });
 })
 
@@ -221,7 +225,7 @@ app.get('/usuario', async (req,res)=>{
 app.get('/usuario/:id', async (req,res)=>{
     const {id} = req.params;
     const [query] = await connection.execute('select * from karadoa.usuario where id = ?', [id]);
-    if(query.lenght === 0) return res.status(400).json({mensagem: 'Nao encontrado. '});
+    if(query.length === 0) return res.status(400).json({mensagem: 'Nao encontrado. '});
     return res.status(200).json(query);
 })
 
@@ -229,14 +233,14 @@ app.get('/usuario/buscar/:nome', async (req,res)=>{
     const {nome} = req.params;
     let nomex = '%'+nome+'%'
     const [query] = await connection.execute('select * from karadoa.usuario where nome like ?', [nomex]);
-    if(query.lenght === 0) return res.status(400).json({mensagem: 'Nao encontrado. '});
+    if(query.length === 0) return res.status(400).json({mensagem: 'Nao encontrado. '});
     return res.status(200).json(query);
 })
 
 app.post('/usuario', async (req,res)=>{
     const {nome, email, cpf, telefone, senha, cep, cidade, estado} = req.body;
     const [query] = await connection.execute('insert into karadoa.usuario (nome,email,cpf,telefone,senha,cep,cidade,estado) values(?,?,?,?,?,?,?,?)', [nome,email,cpf,telefone,senha,cep,cidade,estado]);
-    if(query.lenght === 0) return res.status(400).json({mensagem: 'Erro na adição'});
+    if(query.length === 0) return res.status(400).json({mensagem: 'Erro na adição'});
     return res.status(200).json({ mensagem: 'Inserido com sucesso.' });
 })
 
