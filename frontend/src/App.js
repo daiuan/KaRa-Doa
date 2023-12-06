@@ -62,11 +62,11 @@ const Home = () => {
  )
 };
 
-function ListarPessoas(){
- const [pessoas, setData] = useState([]);
+function ListarUsuarios(){
+ const [usuario, setData] = useState([]);
  useEffect(() => {
    const fetchData = async () => {
-     const resposta = await axios.get('http://localhost:3333/pessoa');
+     const resposta = await axios.get('http://localhost:3333/usuario');
      setData(resposta.data);
    };
    fetchData();
@@ -78,13 +78,23 @@ function ListarPessoas(){
          <tr style={{ borderBottom: '1px solid #ddd' }}>
            <th style={{ padding: '8px', textAlign: 'left' }}>Nome</th>
            <th style={{ padding: '8px', textAlign: 'left' }}>Email</th>
+           <th style={{ padding: '8px', textAlign: 'left' }}>CPF</th>
+           <th style={{ padding: '8px', textAlign: 'left' }}>Telefone</th>
+           <th style={{ padding: '8px', textAlign: 'left' }}>Cep</th>
+           <th style={{ padding: '8px', textAlign: 'left' }}>Cidade</th>
+           <th style={{ padding: '8px', textAlign: 'left' }}>Estado</th>
          </tr>
        </thead>
        <tbody>
-         {pessoas.map((pessoa, index) => (
+         {usuario.map((usuario, index) => (
            <tr key={index} style={{ borderBottom: '1px solid #ddd' }}>
-             <td style={{ padding: '8px' }}>{pessoa.nome}</td>
-             <td style={{ padding: '8px' }}>{pessoa.email}</td>
+             <td style={{ padding: '8px' }}>{usuario.nome}</td>
+             <td style={{ padding: '8px' }}>{usuario.email}</td>
+             <td style={{ padding: '8px' }}>{usuario.cpf}</td>
+             <td style={{ padding: '8px' }}>{usuario.telefone}</td>
+             <td style={{ padding: '8px' }}>{usuario.cep}</td>
+             <td style={{ padding: '8px' }}>{usuario.cidade}</td>
+             <td style={{ padding: '8px' }}>{usuario.estado}</td>
            </tr>
          ))}
        </tbody>
@@ -103,7 +113,7 @@ const Listar = () => {
  return (
    <>
    <h1>Listar</h1>
-<ListarPessoas></ListarPessoas>
+<ListarUsuarios></ListarUsuarios>
    </>
    
 )
@@ -112,9 +122,15 @@ const Listar = () => {
 
 
 
-const CadastrarPessoa = () => {
+const CadastrarUsuario = () => {
  const [nome, setNome] = useState('');
  const [email, setEmail] = useState('');
+ const [cpf, setCpf] = useState('');
+ const [telefone, setTelefone] = useState('');
+ const [senha, setSenha] = useState('');
+ const [cep, setCep] = useState('');
+ const [cidade, setCidade] = useState('');
+ const [estado, setEstado] = useState('');
  
 
  const handleSubmit = async (e) => {
@@ -122,11 +138,17 @@ const CadastrarPessoa = () => {
 
    try {
      // Envia os dados para a rota usando o método POST
-     await axios.post('http://localhost:3333/pessoa', { nome, email });
+     await axios.post('http://localhost:3333/usuario', { nome, email, cpf, telefone, senha, cep, cidade, estado });
      alert('Dados enviados com sucesso!');
      // Limpa os campos após o envio bem-sucedido
      setNome('');
      setEmail('');
+     setCpf('');
+     setTelefone('');
+     setSenha('');
+     setCep('');
+     setCidade('');
+     setEstado('');
 
    } catch (error) {
      console.error('Erro ao enviar dados:', error);
@@ -136,7 +158,7 @@ const CadastrarPessoa = () => {
 
  return (
    <div>
-     <h2>Formulário de Pessoa</h2>
+     <h2>Formulário de Usuário</h2>
      <form onSubmit={handleSubmit}>
        <label>
          Nome:
@@ -158,6 +180,67 @@ const CadastrarPessoa = () => {
          />
        </label>
        <br />
+       <label>
+         CPF:
+         <input
+           type="number"
+           value={cpf}
+           onChange={(e) => setCpf(e.target.value)}
+           required
+         />
+       </label>
+       <br />
+       <label>
+         Telefone:
+         <input
+           type="tel"
+           value={telefone}
+           onChange={(e) => setTelefone(e.target.value)}
+           required
+         />
+       </label>
+       <br />
+       <label>
+         Cep:
+         <input
+           type="number"
+           value={cep}
+           onChange={(e) => setCep(e.target.value)}
+           required
+         />
+       </label>
+       <br />
+       <label>
+         Cidade:
+         <input
+           type="text"
+           value={cidade}
+           onChange={(e) => setCidade(e.target.value)}
+           required
+         />
+       </label>
+       <br />
+       <label>
+         Estado:
+         <input
+           type="text"
+           value={estado}
+           onChange={(e) => setEstado(e.target.value)}
+           required
+         />
+       </label>
+       <br />
+       <label>
+         Senha:
+         <input
+           type="password"
+           value={senha}
+           onChange={(e) => setSenha(e.target.value)}
+           required
+         />
+       </label>
+       <br />
+       <br />
        <button type="submit">Enviar</button>
      </form>
    </div>
@@ -169,8 +252,8 @@ const Cadastrar = () => {
   
  return (
    <>
-   <h1>Cadastrar</h1>;
-<CadastrarPessoa></CadastrarPessoa>
+   <h1>Cadastrar</h1>
+<CadastrarUsuario></CadastrarUsuario>
    </>
    
 )

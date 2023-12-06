@@ -6,7 +6,11 @@ app.use(express.urlencoded({ extend: true}));
 app.use(express.json());
 app.use(cors());
 
-app.listen(9000, () => console.log("Tudo funcionando chefia 😎👍"));
+const PORT = 3333;
+
+app.listen(PORT, () => 
+{console.log("Tudo funcionando chefia 😎👍")}
+);
 
 const mysql = require('mysql2/promise')
 const connection = mysql.createPool({
@@ -76,6 +80,7 @@ app.get('/', (req,res)=>{
     res.send("Kauan Barbosa Machado");
 })
 
+/* 
 const getAlldoador = async () =>{
     const [query] = await connection
     .execute ('select * from karadoa.doador');
@@ -123,6 +128,7 @@ app.delete('/doador/:id', async (req,res)=>{
     if (query.affectedRows === 0) return res.status(404).json({ mensagem: 'Não encontrado.' });
     return res.status(200).json({ mensagem: 'Doador excluído com sucesso.' });
 })
+*/
 
 // MÉTODOS PARA A TABELA DOAÇÃO
 
