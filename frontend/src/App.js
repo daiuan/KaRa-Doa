@@ -14,6 +14,17 @@ import { Outlet, Link } from "react-router-dom";
 // });
 
 
+//Importar Imagens
+
+import AddImg from './img/add.png';
+import BannerImg from './img/banner.jpg';
+import CampanhaImg from './img/campanha.jpg';
+import HomeImg from './img/home.png';
+import LogoImg from './img/logo.svg';
+import SearchImg from './img/search.png';
+import SupportImg from './img/support.png';
+
+
 function App() {
 
  return (
@@ -36,23 +47,46 @@ function App() {
 const Layout = () => {
  return (
    <>
-     <nav>
-       <ul>
-         <li>
-           <Link to="/">Home</Link>
-         </li>
-         <li>
-           <Link to="/listar">Listar</Link>
-         </li>
-         <li>
-           <Link to="/cadastrar">Cadastrar</Link>
-         </li>
-         <li>
-           <Link to="/doacao">Fazer Doação</Link>
-         </li>
-       </ul>
-     </nav>
-     <hr></hr>
+     <header>
+            <div class="container horizontal desk">
+                <div class="horizontal">
+                    <img src={LogoImg} alt="KaRa Doa"></img>
+                    <input type="search" name="" id="" placeholder="Buscar campanha"></input>
+                    <a href="">Criar</a>
+                </div>
+                <div class="horizontal">
+                    <div class="menu horizontal">
+                      <Link to="/">Início</Link>
+                        <p>•</p>
+                        <a href="">Suporte</a>
+                    </div>
+                    <div class="conta">
+                        <a href="/cadastrar" class="btn2">Criar conta</a>
+                        <a href="" class="btn">Entrar</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container horizontal mobile">
+                <div class="horizontal">
+                    <img src={LogoImg} alt="KaRa Doa" id="logo"></img>
+                    <img src={SearchImg} alt=""></img>
+                    <a href=""><img src={AddImg} alt=""></img></a>
+                </div>
+                <div class="horizontal">
+                    <div class="menu horizontal">
+                        <a href="/"><img src={HomeImg} alt=""></img></a>
+                        <p>•</p>
+                        <a href=""><img src={SupportImg} alt=""></img></a>
+                    </div>
+                    <div class="conta">
+                        <a href="/cadastrar" class="btn2">Criar<br></br>conta</a>
+                        <a href="" class="btn">Entrar</a>
+                    </div>
+                </div>
+            </div>
+
+        </header>
 
      <Outlet />
    </>

@@ -151,8 +151,8 @@ app.get('/doacao/:id', async (req,res)=>{
 })
 
 app.post('/doacao', async (req,res)=>{
-    const {id_doador, id_campanha, valor, status, data, modelo, mensagem} = req.body;
-    const [query] = await connection.execute('insert into karadoa.doacao (id_doador,id_campanha,valor,status,data,modelo,mensagem) values(?,?,?,?,?,?,?)', [id_doador,id_campanha,valor,status,data,modelo,mensagem]);
+    const {nome, cpf, valor, modelo, mensagem} = req.body;
+    const [query] = await connection.execute('insert into karadoa.doacao (nome, cpf, valor, modelo, mensagem) values(?,?,?,?,?)', [nome, cpf, valor, modelo, mensagem]);
     if(query.length === 0) return res.status(400).json({mensagem: 'Erro na adição'});
     return res.status(200).json({ mensagem: 'Inserido com sucesso.' });
 })
