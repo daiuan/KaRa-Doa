@@ -23,6 +23,7 @@ function App() {
          <Route index element={<Home />} />
          <Route path="listar" element={<Listar />} />
          <Route path="cadastrar" element={<Cadastrar />} />
+         <Route path="doacao" element={<Doar />} />
        </Route>
      </Routes>
    </BrowserRouter>
@@ -30,6 +31,8 @@ function App() {
 
 }
 
+
+// Cabeçalho presente em todas as páginas
 const Layout = () => {
  return (
    <>
@@ -44,6 +47,9 @@ const Layout = () => {
          <li>
            <Link to="/cadastrar">Cadastrar</Link>
          </li>
+         <li>
+           <Link to="/doacao">Fazer Doação</Link>
+         </li>
        </ul>
      </nav>
      <hr></hr>
@@ -53,6 +59,7 @@ const Layout = () => {
  )
 };
 
+// Páginas
 const Home = () => {
  return(
    <>
@@ -61,7 +68,33 @@ const Home = () => {
    </>
  )
 };
+const Listar = () => {
+  return (
+    <>
+    <h1>Listar usuários</h1>
+ <ListarUsuarios></ListarUsuarios>
+    </>  
+ )
+ };
+const Cadastrar = () => { 
+  return (
+    <>
+    <h1>Cadastrar</h1>
+ <CadastrarUsuario></CadastrarUsuario>
+    </>  
+ )
+ };
+const Doar = () => { 
+  return (
+    <>
+    <h1>Dados para doação</h1>
+ <FazerDoacao></FazerDoacao>
+    </>  
+ )
+ };
 
+
+//Função De listagem dos usuários 
 function ListarUsuarios(){
  const [usuario, setData] = useState([]);
  useEffect(() => {
@@ -99,29 +132,10 @@ function ListarUsuarios(){
          ))}
        </tbody>
      </table>
-
-
-
-
  );
-
 }
 
-
-
-const Listar = () => {
- return (
-   <>
-   <h1>Listar</h1>
-<ListarUsuarios></ListarUsuarios>
-   </>
-   
-)
-};
-
-
-
-
+//Função de Cadastrar usuários
 const CadastrarUsuario = () => {
  const [nome, setNome] = useState('');
  const [email, setEmail] = useState('');
@@ -247,17 +261,7 @@ const CadastrarUsuario = () => {
  );
 };
 
-
-const Cadastrar = () => {
-  
- return (
-   <>
-   <h1>Cadastrar</h1>
-<CadastrarUsuario></CadastrarUsuario>
-   </>
-   
-)
-};
+//Função de fazer doação
 
 
 export default App;
