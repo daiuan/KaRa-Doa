@@ -165,6 +165,14 @@ app.put('/doacao/:id', async (req, res) => {
     return res.status(200).json({ mensagem: 'Doação alterada com sucesso.' });
 })
 
+app.get('/doacao/arrecadado', async (req,res)=>{
+    const [query] = await connection.execute ('select sum(valor) from karadoa.doacao');
+    return res.status(200).json(query);
+}
+)
+
+
+
 // MÉTODOS PARA A TABELA CAMPANHA
 
 const getAllcampanha = async () =>{

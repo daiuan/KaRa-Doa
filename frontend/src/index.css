@@ -35,7 +35,12 @@ header{
 }
 
 .container{
-    width: 70%;
+    width: 80%;
+    margin: 0 auto;
+}
+
+.container-doacao{
+    width: 50%;
     margin: 0 auto;
 }
 
@@ -126,6 +131,14 @@ header input::placeholder{
     width: 90%;
     margin: auto;
 }
+
+.card-doacao{
+    margin: auto;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+}
+
 
 .card .horizontal{
     margin-top: 10px;

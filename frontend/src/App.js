@@ -14,7 +14,7 @@ import { Outlet, Link } from "react-router-dom";
 // });
 
 
-//Importar Imagens
+//Importar Imagens da pasta img dentro de src
 
 import AddImg from './img/add.png';
 import BannerImg from './img/banner.jpg';
@@ -24,22 +24,21 @@ import LogoImg from './img/logo.svg';
 import SearchImg from './img/search.png';
 import SupportImg from './img/support.png';
 
-
+// Rotas/links
 function App() {
-
  return (
    <BrowserRouter>
      <Routes>
        <Route path="/" element={<Layout />}>
          <Route index element={<Home />} />
-         <Route path="listar" element={<Listar />} />
+         <Route path="listardoacao" element={<Listar_Doacao />} />
          <Route path="cadastrar" element={<Cadastrar />} />
          <Route path="doacao" element={<Doar />} />
+         <Route path="campanha" element={<Campanha />} />
        </Route>
      </Routes>
    </BrowserRouter>
  );
-
 }
 
 
@@ -94,22 +93,116 @@ const Layout = () => {
 };
 
 // Páginas
+
+// Html da página principal/início
 const Home = () => {
  return(
    <>
-   <h1>Home</h1>
-   <p>IFSP</p>
+   <section class="banner">
+            <div></div>
+        </section>
+
+        <section>
+            <div class="container campanhas">
+                <h1>Campanhas</h1>
+
+                <div class="grid">
+                    <div class="item">
+                        <div class="card">
+                            <div class="card-content">
+                                <h1>Prédio escolar</h1>
+                                <img src={CampanhaImg}></img>
+                                <div class="horizontal">
+                                    <progress max="100" value="50"> </progress>
+                                    <a href="/campanha" class="btn">Ver campanha</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                
+                    <div class="item">
+                        <div class="card">
+                            <div class="card-content">
+                                <h1>Prédio escolar</h1>
+                                <img src={CampanhaImg}></img>
+                                <div class="horizontal">
+                                    <progress max="100" value="50"> </progress>
+                                    <a href="/campanha" class="btn">Ver campanha</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="card">
+                            <div class="card-content">
+                                <h1>Prédio escolar</h1>
+                                <img src={CampanhaImg}></img>
+                                <div class="horizontal">
+                                    <progress max="100" value="50"> </progress>
+                                    <a href="/campanha" class="btn">Ver campanha</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="card">
+                            <div class="card-content">
+                                <h1>Prédio escolar</h1>
+                                <img src={CampanhaImg}></img>
+                                <div class="horizontal">
+                                    <progress max="100" value="50"> </progress>
+                                    <a href="/campanha" class="btn">Ver campanha</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="card">
+                            <div class="card-content">
+                                <h1>Prédio escolar</h1>
+                                <img src={CampanhaImg}></img>
+                                <div class="horizontal">
+                                    <progress max="100" value="50"> </progress>
+                                    <a href="/campanha" class="btn">Ver campanha</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="card">
+                            <div class="card-content">
+                                <h1>Prédio escolar</h1>
+                                <img src={CampanhaImg}></img>
+                                <div class="horizontal">
+                                    <progress max="100" value="50"> </progress>
+                                    <a href="/campanha" class="btn">Ver campanha</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                
+                </div>
+
+            </div>
+        </section>
+
+        <footer>
+            <div class="container">
+                <div class="links">
+                    <a href="">Quem Somos</a>
+                    <a href="">Dúvidas Frequentes</a>
+                    <a href="">Suporte</a>
+                </div>
+                <hr></hr>
+                &copy; 2023 KaRa - Todos os Direitos Reservados
+            </div>
+        </footer>
    </>
  )
 };
-const Listar = () => {
-  return (
-    <>
-    <h1>Listar usuários</h1>
- <ListarUsuarios></ListarUsuarios>
-    </>  
- )
- };
+
+
+// Html da página de cadastro de usuário
 const Cadastrar = () => { 
   return (
     <>
@@ -118,15 +211,113 @@ const Cadastrar = () => {
     </>  
  )
  };
-const Doar = () => { 
+
+// Html da página da campanha
+const Campanha = () => { 
   return (
     <>
-    <h1>Dados para doação</h1>
-    <FazerDoacao></FazerDoacao>
+    <section class="banner">
+            <div>
+                <h1>Prédio Escolar</h1>
+            </div>
+        </section>
+
+        <section>
+            <div class="container">
+                <div class="horizontal arrecadado">
+                    <div class="info">
+                        <h1>Prédio escolar</h1>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe ipsa consequatur quod, reiciendis pariatur magnam rem maiores, dicta, unde aliquid officiis minima ratione dolorum ipsam sed non nostrum velit mollitia praesentium. Nesciunt, omnis aliquam praesentium totam optio saepe beatae nulla veritatis, fuga excepturi ratione, porro sequi quidem doloremque? Numquam, quo!</p>
+                        
+                        <div>
+                            <strong><p>Arrecadado:</p></strong>
+                            <p>R$ 900.000,00 / R$ 1.800.000,00</p>
+                            <progress max="100" value="50"> </progress>
+                        </div>
+                    </div>
+                    
+
+                    <div class="card" id="card-detail">
+                        <div class="card-content">
+                            <img src={CampanhaImg}></img>
+                            <div class="horizontal">
+                                <a href="/doacao" class="btn">Quero doar</a>
+                            </div>
+                            <div class="horizontal">
+                                <a href="/listardoacao" class="card-doacao">Listar doações já feitas</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="container campanhas">
+                <h1>Sobre a Campanha</h1>
+
+                <div class="horizontal">
+                    <iframe width="1280" height="720" src="https://www.youtube.com/embed/gY1DG6bgeMs?si=h-ELHsmsu7TVtvyO" title="Sociologia - TI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione quod corporis ex molestias culpa. Et, nihil nam ea possimus error quam similique. Earum quis aliquam reprehenderit eos illum est odio delectus quo saepe doloremque vero minima, dolor vel voluptate alias quasi optio nobis eius et minus harum accusantium nihil ex molestias. Veritatis qui amet expedita delectus dicta accusantium, quo voluptate quaerat, maiores ullam sequi quos non voluptas esse cupiditate! Ratione accusantium libero obcaecati harum necessitatibus accusamus minima assumenda quo. Exercitationem ducimus similique est unde accusamus magni, placeat quis esse deserunt, facilis tenetur sed dolore dolorum, nobis assumenda? Debitis in vel numquam labore laudantium maxime doloremque, quae iusto magnam consectetur velit reprehenderit odio modi rem assumenda mollitia delectus fugiat porro nesciunt similique incidunt quas voluptas. Sequi a cumque soluta ut quos provident, earum reiciendis omnis velit porro asperiores delectus dolore commodi! Error iusto laboriosam dignissimos! Ad impedit assumenda suscipit repellat pariatur.
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+        <footer>
+            <div class="container">
+                <div class="links">
+                    <a href="">Quem Somos</a>
+                    <a href="">Dúvidas Frequentes</a>
+                    <a href="">Suporte</a>
+                </div>
+                <hr></hr>
+                &copy; 2023 KaRa - Todos os Direitos Reservados
+            </div>
+        </footer>
     </>  
  )
  };
 
+// Html da página de doação para a campanha 
+const Doar = () => { 
+  return (
+    <>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <div class="container-doacao">
+      <div class="card ">
+        <div class="card-doacao">
+          <FazerDoacao></FazerDoacao>
+        </div>
+      </div>
+      </div>
+    </>  
+ )
+ };
+
+// Html da página listar doações
+const Listar_Doacao = () => {
+  return (
+    <>
+    <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+    <h1>Listar Doações</h1>
+ <ListarDoacao></ListarDoacao>
+    </>  
+ )
+ };
 
 //Função De listagem dos usuários 
 function ListarUsuarios(){
@@ -296,7 +487,6 @@ const CadastrarUsuario = () => {
 };
 
 //Função de cadastrar doação
-
 const FazerDoacao = () => {
   const [nome, setNome] = useState('');
   const [cpf, setCpf] = useState('');
@@ -324,10 +514,12 @@ const FazerDoacao = () => {
       alert('Erro ao enviar dados. Consulte o console para mais detalhes.');
     }
   };
+
  
   return (
     <div>
-      <h2>Vamos fazer uma doação! 😁😁😁</h2>
+      <h2>Formulário de doação</h2>
+      <br></br>
       <form onSubmit={handleSubmit}>
         <label>
           Nome:
@@ -360,7 +552,7 @@ const FazerDoacao = () => {
         </label>
         <br />
         <label>
-          Modelo:
+          Forma de Pagamento:
           <input
             type="text"
             value={modelo}
@@ -385,6 +577,48 @@ const FazerDoacao = () => {
     </div>
   );
  };
+
+//Função de listar doações
+function ListarDoacao(){
+  const [doacao, setData] = useState([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      const resposta = await axios.get('http://localhost:3333/doacao');
+      setData(resposta.data);
+    };
+    fetchData();
+  }, []);
+ 
+  return (
+    <table style={{ borderCollapse: 'collapse', width: '100%' }}>
+        <thead>
+          <tr style={{ borderBottom: '1px solid #ddd' }}>
+            <th style={{ padding: '8px', textAlign: 'left' }}>Nome</th>
+            <th style={{ padding: '8px', textAlign: 'left' }}>CPF</th>
+            <th style={{ padding: '8px', textAlign: 'left' }}>Valor</th>
+            <th style={{ padding: '8px', textAlign: 'left' }}>Forma de Pagamento</th>
+            <th style={{ padding: '8px', textAlign: 'left' }}>Mensagem</th>
+          </tr>
+        </thead>
+        <tbody>
+          {doacao.map((doacao, index) => (
+            <tr key={index} style={{ borderBottom: '1px solid #ddd' }}>
+              <td style={{ padding: '8px' }}>{doacao.nome}</td>
+              <td style={{ padding: '8px' }}>{doacao.cpf}</td>
+              <td style={{ padding: '8px' }}>{doacao.valor}</td>
+              <td style={{ padding: '8px' }}>{doacao.modelo}</td>
+              <td style={{ padding: '8px' }}>{doacao.mensagem}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+  );
+ }
+
+//Função de calcular valor arrecadado
+const Soma = () => {
+
+}
 
 // Final 
 
