@@ -24,7 +24,7 @@ import LogoImg from './img/logo.svg';
 import SearchImg from './img/search.png';
 import SupportImg from './img/support.png';
 
-// Rotas/links
+// Rotas ou links
 function App() {
  return (
    <BrowserRouter>
@@ -32,6 +32,7 @@ function App() {
        <Route path="/" element={<Layout />}>
          <Route index element={<Home />} />
          <Route path="listardoacao" element={<Listar_Doacao />} />
+         <Route path="listarusuarios" element={<Listar_Usuarios />} />
          <Route path="cadastrar" element={<Cadastrar />} />
          <Route path="doacao" element={<Doar />} />
          <Route path="campanha" element={<Campanha />} />
@@ -57,7 +58,7 @@ const Layout = () => {
                     <div class="menu horizontal">
                       <Link to="/">Início</Link>
                         <p>•</p>
-                        <a href="">Suporte</a>
+                        <a href="listarusuarios">Usuários</a>
                     </div>
                     <div class="conta">
                         <a href="/cadastrar" class="btn2">Criar conta</a>
@@ -201,13 +202,24 @@ const Home = () => {
  )
 };
 
-
 // Html da página de cadastro de usuário
 const Cadastrar = () => { 
   return (
     <>
-    <h1>Cadastrar</h1>
- <CadastrarUsuario></CadastrarUsuario>
+    <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <div class="container-doacao">
+      <div class="card ">
+        <div class="card-doacao">
+          <CadastrarUsuario></CadastrarUsuario>
+        </div>
+      </div>
+      </div>
     </>  
  )
  };
@@ -231,7 +243,7 @@ const Campanha = () => {
                         
                         <div>
                             <strong><p>Arrecadado:</p></strong>
-                            <p>R$ 900.000,00 / R$ 1.800.000,00</p>
+                            <p> Não sabemos / R$ 1.800.000,00</p>
                             <progress max="100" value="50"> </progress>
                         </div>
                     </div>
@@ -315,6 +327,21 @@ const Listar_Doacao = () => {
       <br></br>
     <h1>Listar Doações</h1>
  <ListarDoacao></ListarDoacao>
+    </>  
+ )
+ };
+
+// Html da página listar usuários
+const Listar_Usuarios = () => {
+  return (
+    <>
+    <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+    <h1>Listar Usuários</h1>
+ <ListarUsuarios></ListarUsuarios>
     </>  
  )
  };
@@ -614,11 +641,6 @@ function ListarDoacao(){
       </table>
   );
  }
-
-//Função de calcular valor arrecadado
-const Soma = () => {
-
-}
 
 // Final 
 
