@@ -1,3 +1,4 @@
+
 import axios from 'axios';
 import React, { useState, useEffect } from "react";
 
@@ -13,6 +14,7 @@ import { Outlet, Link } from "react-router-dom";
 //     }
 // });
 
+// Css das páginas está em index.css
 
 //Importar Imagens da pasta img dentro de src
 
@@ -93,7 +95,6 @@ const Layout = () => {
  )
 };
 
-// Páginas
 
 // Html da página principal/início
 const Home = () => {
